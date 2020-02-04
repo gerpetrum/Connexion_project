@@ -1,0 +1,114 @@
+swagger: "2.0"
+
+info:
+  title: FlaskApi
+  version: "0.1"
+  description: RESTApi for documents in Pandas dataframe
+
+consumes:
+  - application/json
+  - multipart/form-data
+  - text/plain
+
+produces:
+  - application/json
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      operationId: app.health
+      summary: Health Check
+      responses:
+        '200':
+          description: Status message from server describing current health
+
+  /post_file:
+    post:
+      tags: [POST]
+      operationId: app.post_file
+      summary: Post row info at database
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          description: file to write
+      responses:
+        '200':
+          description: Successful writing made
+
+  /put_file:
+    post:
+      tags: [PUT]
+      operationId: app.put_file
+      summary: PUT row info at database
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          description: file to rewrite
+      responses:
+        '200':
+          description: Successful writing made
+
+  /get_file:
+    get:
+      tags: [GET]
+      operationId: app.get_file
+      summary: GET row from database
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "accept"
+          in: "header"
+          type: string
+          required: True
+        - name: file_name
+          description: file to get
+          in: query
+          type: string
+      responses:
+        '200':
+          description: Base64-encoded string
+
+  /delete_file:
+    delete:
+      tags: [DELETE]
+      operationId: app.delete_file
+      summary: DELETE row from database
+      parameters:
+        - name: file_name
+          description: file to DELETE
+          in: query
+          type: string
+      responses:
+        '200':
+          description: Successful getting made
+
+  /head_file:
+    head:
+      tags: [HEAD]
+      operationId: app.head_file
+      summary: HEAD row from database
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "accept"
+          in: "header"
+          type: string
+          required: True
+        - name: extensions
+          description: file to head
+          in: query
+          type: string
+      responses:
+        '200':
+          description: Base64-encoded string
