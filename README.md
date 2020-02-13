@@ -22,7 +22,11 @@ if __name__ == "__main__":
     app.run(port=8080)
 ```
 ### swagger.yaml
-Для полноценной работы с connexion нужен swagger.yaml файл, в котором содержится описание всех методов и их параметров:
+
+https://swagger.io/docs/specification/2-0/describing-request-body/
+
+Для полноценной работы с connexion нужен swagger.yaml файл, в котором содержится 
+описание всех методов и их параметров:
 ```
 swagger: "2.0"
 
@@ -98,6 +102,8 @@ def post_file() -> int:
 - HEAD - вернуть названия всех файлов из DataFrame
 - DELETE - удалить название и сождержимое файла из DataFrame, либо, если файла нет в DataFrame, то вернуть 
 сообщение об этом
+
+**WARNING** Не забудьте дописать методы в swagger.yaml эти методы!
 ```
 def get_file(file_name) -> Tuple[Dict[str, str], int]:
     
